@@ -15,7 +15,15 @@ export default {
   components: {
     TheHeader,
     TheCalculator
-  }
+  },
+  mounted() {
+    let testLibrary = document.createElement("script");
+    testLibrary.setAttribute(
+      "src",
+      "https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"
+    );
+    document.head.appendChild(testLibrary);
+  },
 }
 </script>
 

@@ -2,9 +2,9 @@
   <div>
     <div class="grid-container">
       <div id="history-screen">history screen</div>
-      <div id="display">entry screen</div>
+      <div id="display">{{ display }}</div>
       
-      <div id="clear">AC</div>
+      <div id="clear" @click="clear()">AC</div>
       <div id="divide" class="operator">/</div>
       <div id="multiply" class="operator">*</div>
       <div id="subtract" class="operator">-</div>
@@ -12,22 +12,42 @@
       <div id="equals">=</div>
       <div id="decimal">.</div>
 
-      <div id="one">1</div>
-      <div id="two">2</div>
-      <div id="three">3</div>
-      <div id="four">4</div>
-      <div id="five">5</div>
-      <div id="six">6</div>
-      <div id="seven">7</div>
-      <div id="eight">8</div>
-      <div id="nine">9</div>
-      <div id="zero">0</div>
+      <div id="one" @click="input('1')">1</div>
+      <div id="two" @click="input('2')">2</div>
+      <div id="three" @click="input('3')">3</div>
+      <div id="four" @click="input('4')">4</div>
+      <div id="five" @click="input('5')">5</div>
+      <div id="six" @click="input('6')">6</div>
+      <div id="seven" @click="input('7')">7</div>
+      <div id="eight" @click="input('8')">8</div>
+      <div id="nine" @click="input('9')">9</div>
+      <div id="zero" @click="input('0')">0</div>
     </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
 export default {
+  setup() {
+    const display = ref('0');
+    const input = (val) => {
+      if (display.value === '0') {
+        display.value = val;
+      } else {
+        display.value += val;
+      }
+      
+    }
+    const clear = () => {
+      display.value = '0';
+    }
+    return {
+      display,
+      input,
+      clear
+    }
+  }
   
 }
 </script>
@@ -58,6 +78,9 @@ export default {
 }
 #display { 
   grid-area: entry;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
   font-family: Digital;
   background-color: black;
 }
